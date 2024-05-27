@@ -1,4 +1,9 @@
-﻿namespace SGestorEscola.Models
+﻿using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
+
+namespace SGestorEscola.Models
 {
     public class Boletim
     {
@@ -59,13 +64,39 @@
                     turma);
             }
         }
-
         public void CreatePDF()
         {
-            string ModeloMapaNota = path + PastaSecretaria + @"\ModeloMapaNotas.pdf";
+            Document doc = new Document(PageSize.A4);
+            doc.SetMargins(40, 40, 40, 80);
+            doc.AddCreationDate();
+            string caminho = @"C:\SecretariaNotas\TIMBRADO_NOV.pdf";
 
-            Console.WriteLine(ModeloMapaNota);
-            Console.WriteLine("---------------------------");
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(caminho, FileMode.Create));
+            doc.Open();
+
+
+            /*Paragraph titulo = new Paragraph();
+            titulo.Font = new Font(Font.FontFamily.COURIER, 40);
+            titulo.Alignment = Element.ALIGN_CENTER;
+            titulo.Add("teste\n\n");
+            doc.Add(titulo);*/
+
+            PdfContentByte cb = writer.DirectContent;
+            cb.BeginText();
+
+            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+            cb.SetFontAndSize(bf, 8);
+
+            cb.SetTextMatrix(10, 830); // Left, Top  
+            cb.ShowText("Hello World");
+
+            cb.SetTextMatrix(30, 830); // Left, Top  
+            cb.ShowText("Hello World");
+
+            cb.EndText();
+
+
+            doc.Close();
         }
     }
 }
