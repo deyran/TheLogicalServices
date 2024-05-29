@@ -91,5 +91,12 @@ public class AgendaService : IAgendaService
 			await _dbConnection.CreateTableAsync<Contato>();
 		}
 	}
+
+	public async Task<int> AddContato(Contato contato)
+	{
+		return await _dbConnection.InsertAsync(Contato);
+	}	
+
+	... 
 }
 ```
