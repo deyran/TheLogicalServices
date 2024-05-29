@@ -27,6 +27,10 @@
 3. Text
 4. Blog	
 
+## DB Browser for SQLite
+
+Permite criar, pesquisar e editar banco de dados SQLite
+
 ## Mapeamento
 
 1. No diretório MVVM/Models
@@ -48,8 +52,29 @@ public class Contato
 }
 ```
 
-2. DB Browser for SQLite
+2. IAgendaService
 
-Permite criar, pesquisar e editar banco de dados SQLite
+```
+public interface IAgendaService
+{
+	Task InitializeAsync();
+	Task<List<Contato>> GetContato();
+	Task<int> AddContato(Contato contato);
+	Task<int> UpdateContato(Contato contato);
+	Task<int> DeleteContato(Contato contato);
+}
+```
 
-3. 
+
+3. AgendaService
+
+```
+public class AgendaService : IAgendaService
+{
+	private SQLiteAsyncConnection _dbConnection;
+	public async Task InitializeAsync()
+	{
+		await SetUpDb();
+	}
+}
+```
