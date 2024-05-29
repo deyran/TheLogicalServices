@@ -76,5 +76,20 @@ public class AgendaService : IAgendaService
 	{
 		await SetUpDb();
 	}
+
+	private async Task SetUpDb()
+	{
+		if(_dbConnection == null)
+		{
+			string dbPath = Path.Combine(
+				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+				"Agenda.db3"
+			);
+
+			_dbConnection = new SQliteAsyncConnection(dbPath);
+
+			await _dbConnection.CreateTableAsync<Contato>();
+		}
+	}
 }
 ```
