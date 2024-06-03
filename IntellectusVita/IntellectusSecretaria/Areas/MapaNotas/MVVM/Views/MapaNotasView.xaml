@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IntellectusSecretaria.Areas.MapaNotas.MVVM.Views.MapaNotasView"
              Title="Mapa de Notas">
-    
+
     <StackLayout>
-        <Label Text="Deyvid Rannyere de Moraes Costa" />
+        <Button Text="Encerrar Aplicação" Clicked="Button_Clicked" />
     </StackLayout>
-    
+
 </ContentPage>
